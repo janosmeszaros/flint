@@ -13,11 +13,12 @@
            (s/conform ::vs/values '{?foo [1 2 3]
                                     ?bar [:x :y :z]})))
     (is (= '[:values/map [[[:ax/var ?foo] [:ax/var ?bar]]
-                          [[[:values/undef nil] [:ax/prefix-iri :x]]
-                           [[:ax/literal 2] [:values/undef nil]]]]]
-           (s/conform ::vs/values '{[?foo ?bar] [[nil :x] [2 nil]]})
-           (s/conform ::vs/values '{?foo [nil 2]
-                                    ?bar [:x nil]})))))
+                          [[[:values/undef nil]  [:ax/bnode _blank]]
+                           [[:ax/literal 2] [:ax/prefix-iri :x]]
+                           [[:ax/bnode _blank] [:values/undef nil]]]]]
+           (s/conform ::vs/values '{[?foo ?bar] [[nil _blank] [2 :x] [_blank nil]]})
+           (s/conform ::vs/values '{?foo [nil 2 _blank]
+                                    ?bar [_blank :x nil]})))))
 
 (deftest invalid-values-test
   (testing "Invalid VALUES clauses"

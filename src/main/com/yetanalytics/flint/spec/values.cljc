@@ -6,6 +6,7 @@
   (s/or :ax/iri        ax/iri-spec
         :ax/prefix-iri ax/prefix-iri-spec
         :ax/literal    ax/literal-spec
+        :ax/bnode      ax/bnode-spec
         :values/undef  nil?))
 
 (defn- matching-val-lengths*
